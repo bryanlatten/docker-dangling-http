@@ -7,10 +7,11 @@ A small node webservice to be used under HTTP load test. Use querystring paramet
 1. Run the app `./bin/start` or `node ./bin/start`
 1. Make HTTP requests against the live service with the following querystring variables, which may be combined:
 
-QS Variable | Example | Default | Description
+Querystring | Name | Example | Default | Description
 --- | --- | --- | ---
-d | /?d=30 | 0 | Seconds to delay before HTTP response is sent
-e | /?e=1 | 0 | Prematurely breaks HTTP connection, with empty response
+d | Delay | /?d=30 | 0 | Seconds to delay before HTTP response is sent
+r | Random | /?r=30 | 0 | Adds time to delay, randomly, up to provided value
+e | Empty | /?e=1 | 0 | Prematurely breaks HTTP connection, with empty response
 
 ### Usage (Docker)
 
@@ -33,6 +34,15 @@ $ curl 127.0.0.1:3000/\?d=30
 [Response from 127.0.0.1]
   - delayed 30s
 ```
+
+- Request completed, minimum 10 seconds delay, with additional random 5 seconds
+```bash
+$ curl 127.0.0.1:3000/\?d=10\&r=5
+[Response from 127.0.0.1]
+  - adding 3s random delay (max 5s)
+  - delayed 13s
+```
+
 
 - Request ended, broken, after 15 seconds delay
 ```bash
