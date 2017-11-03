@@ -1,0 +1,22 @@
+{
+  "id": "dangling-http",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "bryanlatten/docker-dangling-http",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 3000, "hostPort": 0 }
+      ]
+    }
+  },
+  "healthChecks": [
+  {
+    "gracePeriodSeconds": 10,
+    "intervalSeconds": 5,
+    "maxConsecutiveFailures": 0,
+    "path": "/",
+    "portIndex": 0,
+    "protocol": "HTTP"
+  }]
+}

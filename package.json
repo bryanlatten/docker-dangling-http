@@ -1,0 +1,19 @@
+{
+  "name": "docker-dangling-http",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/bryanlatten/docker-dangling-http",
+  "scripts": {
+    "start": "node ./bin/start"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0"
+  }
+}
