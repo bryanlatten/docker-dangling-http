@@ -8,7 +8,7 @@ A small node webservice to be used under HTTP load test. Use querystring paramet
 1. Make HTTP requests against the live service with the following querystring variables, which may be combined:
 
 Querystring | Name | Example | Default | Description
---- | --- | --- | ---
+--- | --- | --- | --- | ---
 d | Delay | /?d=30 | 0 | Seconds to delay before HTTP response is sent
 r | Random | /?r=30 | 0 | Adds time to delay, randomly, up to provided value
 e | Empty | /?e=1 | 0 | Prematurely breaks HTTP connection, with empty response
