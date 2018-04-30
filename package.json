@@ -7,11 +7,11 @@
     "start": "node ./bin/start"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "express": "^4.16.3",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
