@@ -7,5 +7,6 @@ WORKDIR /app
 
 RUN export NODE_ENV=production && npm install
 
-ENTRYPOINT ["./bin/start"]
+ENTRYPOINT ["./node_modules/pm2/bin/pm2-docker"]
+CMD ["start", "./bin/start", "-i", "max"]
 
