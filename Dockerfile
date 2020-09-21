@@ -1,12 +1,18 @@
-FROM mhart/alpine-node:10
+FROM mhart/alpine-node:12
 
 # Ensure application code makes it into the /app directory
 COPY ./ /app/
-
 WORKDIR /app
 
-RUN export NODE_ENV=production && npm install
+RUN export NODE_ENV=production && npm ci
+
+# Then we copy over the modules from above onto a `slim` image
+FROM mhart/alpine-node:slim-12
+
+EXPOSE 3000
+
+WORKDIR /app
+COPY --from=0 /app .
 
 ENTRYPOINT ["./node_modules/pm2/bin/pm2-docker"]
-CMD ["start", "./bin/start", "-i", "max"]
-
+CMD ["start", "index.js", "-i", "max"]
