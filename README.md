@@ -1,21 +1,22 @@
 # docker-dangling-http
 A small node webservice to be used under HTTP load test. Use querystring parameters to modify how quickly (or not) the service responds.
 
-### Usage
+### Development
 1. Clone repo, `cd docker-dangling-http`
 1. Install dependencies, `npm i`
-1. Run the app `./bin/start` or `node ./bin/start`
-1. Make HTTP requests against the live service with the following querystring variables, which may be combined:
+1. Run the app `npm start` or `node index`
+
+### Usage (Docker)
+
+- Available on Docker Hub `bryanlatten/docker-dangling-http`
+- `docker run --rm -p 3000:3000 bryanlatten/docker-dangling-http`
+- Make HTTP requests against the `docker-machine` IP + port (3000) or `localhost:3000` (linux + docker4mac/win) with the following querystring variables, which may be combined:
 
 Querystring | Name | Example | Default | Description
 --- | --- | --- | --- | ---
 d | Delay | /?d=30 | 0 | Seconds to delay before HTTP response is sent
 r | Random | /?r=30 | 0 | Adds time to delay, randomly, up to provided value
 e | Empty | /?e=1 | 0 | Prematurely breaks HTTP connection, with empty response
-
-### Usage (Docker)
-
-- Available on Docker Hub `docker pull bryanlatten/docker-dangling-http:latest`
 
 ### Example
 
@@ -107,10 +108,8 @@ Percentage of the requests served within a certain time (ms)
  100%   1003 (longest request)
  ```
 
-### Run with DC/OS (Marathon) or Kubernetes
+### Run with Kubernetes
 
  Responds to HTTP traffic from standard benchmarking tools (`ab`, `jmeter`, `gatling`, `locust.io`)
 
-- `marathon.json`: sample DC/OS application definition
-- `manifest.yaml`: sample Kubernetes Pod definition
-
+- `kubernetes.yaml`: sample Kubernetes Pod definition

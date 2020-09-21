@@ -3,23 +3,24 @@
 /**
  * Module dependencies.
  */
-const config = require('../lib/config');
-const VERSION = '1.0.0'
+const http = require('http');
+const config = require('./lib/config');
+const app = require('./lib/web');
 
-console.log('docker-dangling-http, Version ' + VERSION);
+const VERSION = '1.0.0';
 
-let app = require('../lib/web');
-let port = normalizePort(config.defaultPort);
+console.log(`docker-dangling-http, Version ${VERSION}`);
+const port = normalizePort(config.defaultPort);
 
 app.set('port', port);
 
-let server = require('http').createServer(app);
+const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 
-var stopServer = () => {
+const stopServer = () => {
   console.log('Stopping server...');
-  server.close(() => { process.exit(0); })
+  server.close(() => process.exit(0));
 };
 
 // Required cleanup behavior
@@ -30,16 +31,16 @@ process.on('SIGINT', stopServer);
  * Normalize a port into a number, string, or false.
  */
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const parsedPort = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (Number.isNaN(parsedPort)) {
     // named pipe
     return val;
   }
 
-  if (port >= 0) {
+  if (parsedPort >= 0) {
     // port number
-    return port;
+    return parsedPort;
   }
 
   return false;
@@ -53,18 +54,18 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = (typeof port === 'string')
+    ? `Pipe ${port}`
+    : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
