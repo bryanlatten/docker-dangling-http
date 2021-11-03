@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:14
+FROM mhart/alpine-node:16
 
 # Ensure application code makes it into the /app directory
 COPY ./ /app/
@@ -7,7 +7,7 @@ WORKDIR /app
 RUN export NODE_ENV=production && npm ci
 
 # Then we copy over the modules from above onto a `slim` image
-FROM mhart/alpine-node:slim-14
+FROM mhart/alpine-node:slim-16
 
 EXPOSE 3000
 
